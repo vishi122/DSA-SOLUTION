@@ -11,29 +11,34 @@
  */
 class Solution {
 public:
+    vector<int> ans;
     int kthSmallest(TreeNode* root, int k) {
-        if(root==NULL){
-            return 0;
-        }
-        return inorderTraversal(root, k);
+        inorderTraversal(root);
+        return ans[k-1];
     }
-    int inorderTraversal(TreeNode* root, int k) {
-        if(!root) return {};
-        TreeNode* temp=root;
-        vector<int> out;
-        stack<TreeNode*> s;
-        while(temp || !s.empty()){
-            if(temp){
-                s.push(temp);
-                temp=temp->left;
-            }
-            else{
-                temp=s.top();
-                s.pop();
-                out.push_back(temp->val);
-                temp=temp->right;
-            }
+    void inorderTraversal(TreeNode* root) {
+        // if(!root) return {};
+        // TreeNode* temp=root;
+        // vector<int> out;
+        // stack<TreeNode*> s;
+        // while(temp || !s.empty()){
+        //     if(temp){
+        //         s.push(temp);
+        //         temp=temp->left;
+        //     }
+        //     else{
+        //         temp=s.top();
+        //         s.pop();
+        //         out.push_back(temp->val);
+        //         temp=temp->right;
+        //     }
+        // }
+        // return out[k-1];
+        if(root==NULL){
+            return;
         }
-        return out[k-1];
+        inorderTraversal(root->left);
+        ans.push_back(root->val);
+        inorderTraversal(root->right);     
     }
 };
