@@ -2,22 +2,22 @@ class Solution {
 public:
     vector<int> smallerNumbersThanCurrent(vector<int>& nums) {
         int freq[101]={0};
-        for(auto num : nums){
-            freq[num]++;
+        for(int i=0;i<nums.size();i++){
+            freq[nums[i]]++;
         }
-        for (int i = 1; i <= 100; i++) {
-            freq[i] += freq[i - 1];
+        for(int i=1;i<=100;i++){
+            freq[i]+=freq[i-1];
         }
-        vector<int> ans;
-        for(auto num : nums){
-            if(num==0){
-                ans.push_back(0);
+        vector<int> ans(nums.size());
+        for(int i=0;i<nums.size();i++){
+            int v=nums[i];
+            if(v==0){
+                ans[i]==0;
             }
             else{
-                ans.push_back(freq[num-1]);
+                ans[i]=freq[v-1];
             }
         }
         return ans;
-
     }
 };
